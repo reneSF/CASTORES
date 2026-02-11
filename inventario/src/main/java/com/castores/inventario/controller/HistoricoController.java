@@ -16,10 +16,9 @@ public class HistoricoController {
         this.movimientoService = movimientoService;
     }
 
-    // Ver histórico (ADMIN)
     @GetMapping
     public String verHistorico(Model model) {
-        model.addAttribute("movimientos", movimientoService.listarMovimientos());
+        model.addAttribute("movimientos", movimientoService.obtenerTodos());
         return "historico/listar";
     }
 }
