@@ -16,31 +16,24 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // LISTAR
+    // Ver usuarios (ADMIN)
     @GetMapping
     public String listarUsuarios(Model model) {
         model.addAttribute("usuarios", usuarioService.listarUsuarios());
-        return "usuarios/lista";
+        return "usuarios/listar";
     }
 
-    // FORM NUEVO
+    // Formulario nuevo usuario
     @GetMapping("/nuevo")
     public String nuevoUsuario(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "usuarios/form";
+        return "usuarios/nuevo";
     }
 
-    // GUARDAR
+    // Guardar usuario
     @PostMapping("/guardar")
     public String guardarUsuario(@ModelAttribute Usuario usuario) {
         usuarioService.guardarUsuario(usuario);
-        return "redirect:/usuarios";
-    }
-
-    // ELIMINAR
-    @GetMapping("/eliminar/{id}")
-    public String eliminarUsuario(@PathVariable Long id) {
-        usuarioService.eliminarUsuario(id);
         return "redirect:/usuarios";
     }
 }
