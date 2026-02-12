@@ -11,11 +11,11 @@ import com.castores.inventario.model.Rol;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    // Buscar usuario por email (login)
-    Optional<Usuario> findByEmail(String email);
+    // Buscar usuario por Correo (login)
+    Optional<Usuario> findByCorreo(String correo);
 
     // Validar si existe un correo
-    boolean existsByEmail(String email);
+    boolean existsByCorreo(String correo);
 
     // Buscar por rol (ADMIN / ALMACENISTA)
     Optional<Usuario> findByRol(Rol rol);

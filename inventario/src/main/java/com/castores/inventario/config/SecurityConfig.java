@@ -10,30 +10,31 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth
 
-            // Login y recursos públicos
-            .requestMatchers("/auth/**", "/css/**", "/js/**").permitAll()
+        http
+            .csrf(csrf -> csrf.disable()) // para formularios simples
 
-            // Ver inventario (ambos)
-            .requestMatchers("/inventario").hasAnyRole("ADMIN", "ALMACENISTA")
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/ui/login", "/css/**", "/js/**").permitAll()
 
-            // Acciones SOLO ADMIN
-            .requestMatchers(
-                "/inventario/nuevo",
-                "/inventario/entrada",
-                "/inventario/baja/**",
-                "/inventario/reactivar/**"
-            ).hasRole("ADMIN")
+                .requestMatchers("/ui/inventario/**").hasAnyRole("ADMIN", "ALMACENISTA")
+                .requestMatchers("/ui/salida/**").hasRole("ALMACENISTA")
+                .requestMatchers("/ui/historico/**").hasRole("ADMIN")
 
-            // Salidas SOLO ALMACENISTA
-            .requestMatchers("/salidas/**").hasRole("ALMACENISTA")
+                .anyRequest().authenticated()
+            )
 
-            // Histórico SOLO ADMIN
-            .requestMatchers("/historico/**").hasRole("ADMIN")
+            .formLogin(login -> login
+                .loginPage("/ui/login")      // TU LOGIN REAL
+                .loginProcessingUrl("/login") // endpoint interno de Spring
+                .defaultSuccessUrl("/ui/inventario", true)
+                .permitAll()
+            )
 
-            .anyRequest().authenticated()
-        );
+            .logout(logout -> logout
+                .logoutSuccessUrl("/ui/login?logout")
+                .permitAll()
+            );
 
         return http.build();
     }

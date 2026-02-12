@@ -1,6 +1,7 @@
 package com.castores.inventario.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "productos")
@@ -8,24 +9,18 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
     private Long id;
 
-    @Column(nullable = false)
     private String nombre;
-
     private String descripcion;
+    private Integer cantidad;
+    private Boolean estatus;
 
-    @Column(nullable = false)
-    private int cantidad;
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
 
-    // true = activo, false = dado de baja
-    @Column(nullable = false)
-    private boolean estatus = true;
-
-    // ======================
-    // GETTERS & SETTERS
-    // ======================
-
+    // GETTERS Y SETTERS
     public Long getId() {
         return id;
     }
@@ -50,19 +45,27 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    public boolean isEstatus() {
+    public Boolean getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(boolean estatus) {
+    public void setEstatus(Boolean estatus) {
         this.estatus = estatus;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 }

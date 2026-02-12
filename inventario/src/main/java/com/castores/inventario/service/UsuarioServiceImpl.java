@@ -21,15 +21,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario guardarUsuario(Usuario usuario) {
         // Validación de negocio
-        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+        if (usuarioRepository.existsByCorreo(usuario.getCorreo())) {
             throw new RuntimeException("El correo ya está registrado");
         }
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Optional<Usuario> buscarPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+    public Optional<Usuario> buscarPorCorreo(String Correo) {
+        return usuarioRepository.findByCorreo(Correo);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public boolean existeEmail(String email) {
-        return usuarioRepository.existsByEmail(email);
+    public boolean existeCorreo(String Correo) {
+        return usuarioRepository.existsByCorreo(Correo);
     }
 }

@@ -8,39 +8,30 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Long id;
 
-    @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    @Column(name = "correo")
+    private String correo;
 
-    @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
     private Rol rol;
 
-    @Column(nullable = false)
-    private boolean activo = true;
+    private Boolean estatus;
 
-    // 🔹 Constructor vacío (JPA)
-    public Usuario() {}
+    // GETTERS Y SETTERS CORRECTOS
 
-    // 🔹 Constructor útil
-    public Usuario(String nombre, String email, String password, Rol rol) {
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.rol = rol;
-        this.activo = true;
-    }
-
-    // 🔹 Getters y Setters
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -51,18 +42,18 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPassword() {
         return password;
     }
- 
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -75,11 +66,11 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public Boolean getEstatus() {
+        return estatus;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setEstatus(Boolean estatus) {
+        this.estatus = estatus;
     }
 }

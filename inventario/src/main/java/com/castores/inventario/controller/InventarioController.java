@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/inventario")
+@RequestMapping("/ui/inventario")
 public class InventarioController {
 
     private final InventarioService inventarioService;
@@ -16,60 +16,49 @@ public class InventarioController {
         this.inventarioService = inventarioService;
     }
 
-    // ================================
-    // VER INVENTARIO (ADMIN y ALMACENISTA)
-    // ================================
+    // LISTAR PRODUCTOS
     @GetMapping
     public String verInventario(Model model) {
         model.addAttribute("productos", inventarioService.listarProductos());
         return "inventario/lista";
     }
 
-    // ================================
-    // FORM NUEVO PRODUCTO (SOLO ADMIN)
-    // ================================
+    // FORMULARIO NUEVO (ADMIN)
     @GetMapping("/nuevo")
     public String nuevoProductoForm(Model model) {
         model.addAttribute("producto", new Producto());
         return "inventario/nuevo";
     }
 
-    // ================================
-    // GUARDAR PRODUCTO (SOLO ADMIN)
-    // ================================
+    // GUARDAR (ADMIN)
     @PostMapping("/guardar")
     public String guardarProducto(@ModelAttribute Producto producto) {
+        // REGLA DE NEGOCIO CASTORES: Si es un producto nuevo, la cantidad DEBE ser 0
+        if (producto.getId() == null) {
+            producto.setCantidad(0);
+        }
         inventarioService.guardarProducto(producto);
-        return "redirect:/inventario";
+        return "redirect:/ui/inventario";
     }
 
-    // ================================
-    // AUMENTAR INVENTARIO (SOLO ADMIN)
-    // ================================
-    @PostMapping("/entrada/{id}")
-    public String aumentarInventario(
-            @PathVariable Long id,
-            @RequestParam int cantidad
-    ) {
-        inventarioService.aumentarInventario(id, cantidad);
-        return "redirect:/inventario";
-    }
-
-    // ================================
-    // DAR DE BAJA PRODUCTO (SOLO ADMIN)
-    // ================================
+    // BAJA DE PRODUCTO (ADMIN)
     @PostMapping("/baja/{id}")
     public String darDeBaja(@PathVariable Long id) {
         inventarioService.bajaProducto(id);
-        return "redirect:/inventario";
+        return "redirect:/ui/inventario";
     }
 
-    // ================================
-    // REACTIVAR PRODUCTO (SOLO ADMIN)
-    // ================================
+    // REACTIVAR PRODUCTO (ADMIN)
     @PostMapping("/reactivar/{id}")
     public String reactivarProducto(@PathVariable Long id) {
         inventarioService.reactivarProducto(id);
-        return "redirect:/inventario";
+        return "redirect:/ui/inventario";
+    }
+
+    // Este es el que te está fallando
+    @GetMapping("/ui/producto/nuevo")
+    public String mostrarFormularioNuevo(Model model) {
+        // model.addAttribute("producto", new Producto()); // Si usas Thymeleaf objects
+        return "inventario/nuevo"; // Debe coincidir con la carpeta y nombre del archivo
     }
 }

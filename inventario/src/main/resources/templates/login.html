@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Inventario</title>
+    <link rel="stylesheet" th:href="@{/css/castores.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <h2>Inicio de Sesión</h2>
 
 <form th:action="@{/login}" method="post">
+
     <label>Correo:</label>
-    <input type="email" name="Correo" required />
+    <input type="text" name="username" required />
 
     <br><br>
 
@@ -22,9 +25,10 @@
     <button type="submit">Ingresar</button>
 </form>
 
-<p th:if="${error}" style="color:red;">
-    <span th:text="${error}"></span>
+<p th:if="${param.error}" style="color:red;">
+    Usuario o contraseña incorrectos
 </p>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

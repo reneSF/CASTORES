@@ -9,11 +9,11 @@ public interface UsuarioService {
 
     Usuario guardarUsuario(Usuario usuario);
 
-    Optional<Usuario> buscarPorEmail(String email);
+    Optional<Usuario> buscarPorCorreo(String correo);
 
     List<Usuario> listarUsuarios();
 
     void eliminarUsuario(Long id);
 
-    boolean existeEmail(String email);
+    boolean existeCorreo(String correo);
 }
