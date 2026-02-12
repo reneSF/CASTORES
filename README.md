@@ -1,3 +1,52 @@
+# 📦 Sistema de Control de Inventarios - Castores
+
+Este repositorio contiene la solución técnica para la gestión de inventarios, desarrollada bajo estándares profesionales de arquitectura de software.
+
+---
+
+## 🛠️ Especificaciones Técnicas
+
+Para el desarrollo de este proyecto se utilizaron las siguientes tecnologías y herramientas:
+
+| Componente | Especificación / Versión |
+| :--- | :--- |
+| **IDE Utilizado** | Visual Studio Code / IntelliJ IDEA |
+| **Lenguaje de Programación** | Java 17 (LTS) |
+| **DBMS (Base de Datos)** | MySQL 8.0 |
+| **Framework** | Spring Boot 3.x |
+| **Motor de Plantillas** | Thymeleaf |
+
+---
+
+## 🔑 Credenciales de Acceso
+
+Para facilitar la evaluación de las funcionalidades y el control de roles (RBAC), se han preconfigurado los siguientes usuarios:
+
+| Usuario | Contraseña | Rol / Permisos |
+| :--- | :--- | :--- |
+| **admin** | `admin123` | **ADMIN**: Acceso total, altas, bajas y reportes. |
+| **almacen** | `almacen123` | **ALMACENISTA**: Gestión de stock y salidas. |
+
+---
+
+## 🚀 Pasos para Correr la Aplicación
+
+Siga estrictamente estos pasos para ejecutar el proyecto en su entorno local:
+
+### 1. Configuración de la Base de Datos
+1. Asegúrese de tener **MySQL** en ejecución.
+2. Cree la base de datos: `CREATE DATABASE inventario_castores;`.
+3. Verifique o ajuste sus credenciales en el archivo:
+   `src/main/resources/application.properties`
+
+### 2. Ejecución desde la Terminal
+Abra la terminal dentro de la carpeta raíz del proyecto (`/inventario`) y ejecute:
+
+**En Windows (PowerShell/CMD):**
+```bash
+./mvnw.cmd clean compile
+./mvnw.cmd spring-boot:run
+
 # Instrucciones para Ejecutar el Proyecto Inventario
 
 Estas instrucciones te guiarán para ejecutar el proyecto Spring Boot de inventario con Thymeleaf desde cero.
