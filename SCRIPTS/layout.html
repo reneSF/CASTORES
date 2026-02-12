@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario | Castores</title>
+    <link rel="stylesheet" th:href="@{/css/castores.css}">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">
+        <span>PAQUETERÍA CASTORES</span>
+    </div>
+</header>
+
+<nav class="nav">
+    <a th:href="@{/ui/inventario}">Inventario</a>
+    <a th:href="@{/ui/salida}">Salida</a>
+    <a th:href="@{/ui/historico}">Histórico</a>
+    <a th:href="@{/ui/login}" class="logout">Salir</a>
+</nav>
+
+<main class="content">
+    <!-- Aquí se inyecta el contenido -->
+    <div th:replace="${content}"></div>
+</main>
+
+<footer class="footer">
+    <span>Sistema de Inventario © 2026</span>
+</footer>
+
+</body>
+</html>
